@@ -33,3 +33,6 @@ Estimated percentage of anomalies: ~10% (as the final cycles prior to failure)
 
 Format: .txt files
 
+## Basic EDA
+
+You can see an introducotry EDA [here](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/eda.ipynb) on our , precisly on file train_FD001.txt, to get a better idea on the behavior of our data :zap:
