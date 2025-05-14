@@ -35,4 +35,4 @@ Format: .txt files
 
 ## Basic EDA
 
-You can see an introducotry EDA [here](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/eda.ipynb) on our , precisly on file train_FD001.txt, to get a better idea on the behavior of our data :zap:
+You can see an introducotry EDA in our [eda.ipynb](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/eda.ipynb) notebook, precisly on file train_FD001.txt, to get a better idea on the behavior of our data :zap:
