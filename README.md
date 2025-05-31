@@ -4,35 +4,33 @@
 - Srishti BINWANI
 
 ## Link to the Dataset  
-We are using the NASA Turbofan Engine Degradation Simulation Dataset from Kaggle. [NASA Turbofan Engine Degradation Dataset on Kaggle](https://www.kaggle.com/datasets/behrad3d/nasa-cmaps)
+We are using the Pump Sensor Data dataset from Kaggle. [Pump Sensor Data Dataset on Kaggle](https://www.kaggle.com/datasets/nphantawee/pump-sensor-data)
 
-The dataset meets the requirements of the project: it is public, has time-series data, and is suitable for anomaly detection based on engine performance over time.
+The dataset meets the requirements of the project: it is public, has time-series data, and is suitable for anomaly detection based on pump performance over time.
 
 ## Use Case
-Our project revolves around predictive maintenance of airplane engines. By monitoring the degradation of engine components using time-series sensor data, we aim to predict failures before they happen. This helps decrease downtime, improve safety, and streamline maintenance planning.
+Our project focuses on predictive maintenance of industrial pumps. By monitoring the sensor data from pumps over time, we aim to detect anomalies and predict potential failures before they occur. This helps in reducing maintenance costs, preventing unexpected downtime, and optimizing pump performance.
 
 ## Description of the Dataset
-The dataset contains run-to-failure data for multiple aircraft engines, with each engine consisting of a series of time steps during its operational cycles. Sensor readings and operational conditions are recorded at each time step.
+The dataset contains time-series sensor data from multiple industrial pumps, with readings taken at regular intervals. The data includes various sensor measurements that indicate the operational status and health of the pumps.
 
-The dataset is divided into training and test sets. The training set includes engines that run to failure, while the test set includes engines with truncated life cycles.
+The dataset includes both normal operation data and instances where anomalies or failures occurred, making it suitable for anomaly detection and predictive maintenance applications.
 
-Anomalies in the dataset are primarily identified in the final cycles of an engine's life, where the performance declines sharply before failure. Additionally, significant deviations from normal sensor readings are considered anomalies for our usecase.
+For our analysis, we have selected three specific sensors (sensors 10, 36, and 48) as they exhibit different distributions and characteristics, making them particularly interesting for anomaly detection and pattern analysis.
 
 ## Features include:
-- Engine ID
-- Operational cycle index 
-- 3 operational settings
-- 21 sensor readings 
+- Timestamp
+- Sensor readings (multiple sensors)
+- Machine status
+- Various operational parameters
 
 ## Dataset Statistics
-Number of engines: Differs per file (FD001, FD002, etc.)
-
-Total rows in training dataset: train_FD001.txt is ~20,000
-
-Estimated percentage of anomalies: ~10% (as the final cycles prior to failure)
-
-Format: .txt files
+- Time period: Continuous monitoring data
+- Number of sensors: Multiple sensor readings
+- Selected sensors for analysis: Sensors 10, 36, and 48 (chosen for their distinct distribution patterns)
+- Format: CSV file
+- Contains both normal and anomalous conditions
 
 ## Basic EDA
 
-You can see an introducotry EDA in our [eda.ipynb](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/eda.ipynb) notebook, precisly on file train_FD001.txt, to get a better idea on the behavior of our data :zap:
+You can see an introductory EDA in our [Pump_Sensor_Data_EDA.ipynb](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/Pump_Sensor_Data_EDA.ipynb) notebook to get a better understanding of the data patterns and characteristics
