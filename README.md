@@ -31,6 +31,91 @@ For our analysis, we have selected three specific sensors (sensors 10, 36, and 4
 - Format: CSV file
 - Contains both normal and anomalous conditions
 
+## Anomaly Detection Methods
+
+This project implements two distinct anomaly detection approaches for time series data:
+
+### 1. STL Decomposition Method
+
+**File:** `STL_decomposition_Method.ipynb`
+
+**Method Overview:**
+STL (Seasonal-Trend decomposition using Loess) is a powerful method for decomposing a time series into three distinct components:
+- **Trend:** The long-term progression or movement in the data
+- **Seasonality:** Regular, repeating patterns or cycles in the data
+- **Residual (Remainder):** The part of the data that remains after removing trend and seasonality
+
+**Anomaly Detection Process:**
+1. **Decomposition:** Apply STL decomposition to separate the time series into trend, seasonal, and residual components
+2. **Residual Analysis:** Focus on the residual component where anomalies are most visible
+3. **Threshold-based Detection:** Use a statistical threshold method:
+   - Calculate mean and standard deviation of residuals
+   - Set threshold = mean + (3 × standard deviation)
+   - Flag points exceeding this threshold as anomalies
+
+**Advantages:**
+- Robust and flexible, handling any type of seasonality
+- Uses LOESS smoothing for smooth trend and seasonal components
+- Effectively isolates anomalies in the residual component
+- Provides clear visualization of different data components
+
+**Implementation Details:**
+- Applied to individual sensors (10, 36, 48) separately
+- Uses 3-sigma rule for anomaly threshold
+- Provides visual plots showing original data, components, and detected anomalies
+
+### 2. VAR (Vector Autoregression) Model Method
+
+**File:** `var_model.ipynb`
+
+**Method Overview:**
+Vector Autoregression (VAR) is a multivariate time series model that captures the linear interdependencies among multiple time series variables. It models each variable as a linear function of past values of all variables in the system.
+
+**Anomaly Detection Process:**
+1. **Model Training:** Fit a VAR model using normal operation data (excluding known anomaly periods)
+2. **Forecasting:** Use the trained model to forecast expected values for all time points
+3. **Residual Calculation:** Compute residuals by subtracting forecasted values from actual observations
+4. **Anomaly Scoring:** Calculate anomaly scores using squared residuals summed across all sensors
+5. **Threshold-based Detection:** Flag anomalies using threshold = mean + standard deviation of anomaly scores
+
+**Key Parameters:**
+- **Lag Order:** Determined automatically using model selection criteria (typically around 10 lags)
+- **Multivariate Analysis:** Considers relationships between multiple sensors simultaneously
+- **Anomaly Score:** Sum of squared residuals across all sensors for each time point
+
+**Advantages:**
+- Captures interdependencies between multiple sensors
+- Provides a unified anomaly score for the entire system
+- Can detect anomalies that manifest as unusual relationships between sensors
+- More robust than univariate methods for complex systems
+
+**Implementation Details:**
+- Uses all three selected sensors (10, 36, 48) simultaneously
+- Trains on normal operation data only
+- Provides confusion matrix and performance metrics (precision, recall, F1-score)
+- Includes visualization of anomaly scores and detection results
+
+## Performance Comparison
+
+Both methods offer different strengths:
+
+- **STL Decomposition:** Better for understanding individual sensor behavior and detecting sensor-specific anomalies
+- **VAR Model:** Better for detecting system-wide anomalies and capturing sensor interdependencies
+
+The choice between methods depends on the specific requirements:
+- Use STL for detailed analysis of individual sensor patterns
+- Use VAR for system-level anomaly detection and predictive maintenance
+
 ## Basic EDA
 
 You can see an introductory EDA in our [Pump_Sensor_Data_EDA.ipynb](https://github.com/purnimaprabhav/TimeSeriesAnalysis/blob/main/Pump_Sensor_Data_EDA.ipynb) notebook to get a better understanding of the data patterns and characteristics
+
+## Requirements
+
+The project requires the following Python packages (see `requirements.txt`):
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- statsmodels (for STL and VAR)
+- scikit-learn (for performance metrics)
