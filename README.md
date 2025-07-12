@@ -33,7 +33,7 @@ For our analysis, we have selected three specific sensors (sensors 10, 36, and 4
 
 ## Anomaly Detection Methods
 
-This project implements two distinct anomaly detection approaches for time series data:
+This project implements three distinct anomaly detection approaches for time series data:
 
 ### 1. STL Decomposition Method
 
@@ -64,7 +64,37 @@ STL (Seasonal-Trend decomposition using Loess) is a powerful method for decompos
 - Uses 3-sigma rule for anomaly threshold
 - Provides visual plots showing original data, components, and detected anomalies
 
-### 2. VAR (Vector Autoregression) Model Method
+### 2. MAD-Naive Method
+
+**File:** `STL_decomposition_Method.ipynb` (or a similar notebook)
+
+**Method Overview:**
+The MAD-naive (Median Absolute Deviation) method is a robust statistical approach for anomaly detection. Unlike the mean and standard deviation, MAD uses the median and the median of absolute deviations, making it less sensitive to outliers and non-normal data distributions.
+
+**Anomaly Detection Process:**
+1. **Obtain Residuals:** Use the residual component from STL decomposition (or raw data for a naive approach).
+2. **Calculate Median and MAD:**
+   - Compute the median of the residuals.
+   - Compute the MAD: the median of the absolute deviations from the median.
+3. **Threshold-based Detection:**
+   - Set a threshold, e.g., median + (k × MAD), where k is typically 3.
+   - Flag points whose absolute deviation from the median exceeds this threshold as anomalies.
+
+**Advantages:**
+- **Robust to Outliers:** MAD is not affected by extreme values, making it more reliable for skewed or heavy-tailed data.
+- **Simple and Interpretable:** Easy to implement and understand.
+- **No Assumption of Normality:** Works well even if the residuals are not normally distributed.
+
+**Implementation Details:**
+- Can be applied to STL residuals or directly to raw sensor data (naive approach).
+- The threshold multiplier (k) can be tuned for sensitivity.
+- Provides a more robust alternative to mean-std thresholding, especially for data with outliers.
+
+**Comparison to Mean-Std:**
+- Mean-std is sensitive to outliers and assumes normality; MAD is robust and non-parametric.
+- MAD may detect anomalies that mean-std misses, especially in non-Gaussian data.
+
+### 3. VAR (Vector Autoregression) Model Method
 
 **File:** `var_model.ipynb`
 
